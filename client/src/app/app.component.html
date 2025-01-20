@@ -1,0 +1,65 @@
+<main class="main">
+  <div class="content" fxLayout="column">
+    <div fxLayout="column" fxLayoutAlign="center center" style="padding: 20px;">
+      <div style="padding-bottom: 20px;" *ngIf="utilityForm.invalid && (utilityForm.dirty || utilityForm.touched)"
+        class="error-messages">
+        <div *ngIf="utilityForm.get('utilityName').hasError('required')">
+          Utility Name is required.
+        </div>
+        <div *ngIf="utilityForm.get('utilityDescription').hasError('required')">
+          Description is required.
+        </div>
+      </div>
+      <form (ngSubmit)="submitUtilityForm()" [formGroup]="utilityForm" fxLayout="column" fxLayoutGap="20px"
+        style="width: 300px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Utility Name</mat-label>
+          <input matInput formControlName="utilityName" type="text" placeholder="Enter utility name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="utilityDescription" placeholder="Enter description"></textarea>
+        </mat-form-field>
+        <button mat-flat-button type="submit" color="">Submit</button>
+      </form>
+
+    </div>
+
+    <div fxLayoutAlign="center" fxLayout="row">
+      <div fxLayoutGap="10px" fxFlex.gt-sm="50%" fxFlex.lt-md="100%">
+        <table mat-table [dataSource]="utilitySource" class="mat-elevation-z2">
+          <ng-container matColumnDef="serialNumber">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+          </ng-container>
+          <!-- utilityName Column -->
+          <ng-container matColumnDef="utilityName">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.utilityName}} </td>
+          </ng-container>
+          <!-- utilityDescription Column -->
+          <ng-container matColumnDef="utilityDescription">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.utilityDescription }} </td>
+          </ng-container>
+          <!-- utilityActions Column -->
+          <ng-container matColumnDef="utilityActions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" (click)="editUtilityForm(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteUtilityForm(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="utilityColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: utilityColumns;"></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
