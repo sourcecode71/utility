@@ -1,0 +1,4 @@
+{
+    "jwtPrivateKey": "123456",
+    "db":"mongodb+srv://utlm:kernel123@kernelcodder.zq4fr.mongodb.net/utility"
+}

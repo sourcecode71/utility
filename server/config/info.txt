@@ -1,0 +1,2 @@
+export jwtPrivateKey=mySecureKey  
+ use this command for set the env varable
