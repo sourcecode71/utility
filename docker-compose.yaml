@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server  # Path to the server Dockerfile
+    ports:
+      - "3000:3000"  # Map port 3000 inside the container to port 3000 on the host machine
+    networks:
+      - utility-network
+
+  client:
+    build:
+      context: ./client  # Path to the client Dockerfile
+    ports:
+      - "4200:80"  # Map port 80 inside the container to port 4200 on the host machine
+    networks:
+      - utility-network
+
+networks:
+  utility-network:
+    driver: bridge
